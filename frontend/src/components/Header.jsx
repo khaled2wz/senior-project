@@ -1,13 +1,14 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const NavLink = ({ href, icon, children }) => (
-  <a
-    href={href}
+  <Link
+    to={href}
     className="flex items-center p-2 rounded transition duration-300 hover:bg-gray-200 hover:scale-105"
   >
     {icon}
     {children}
-  </a>
+  </Link>
 );
 
 const Header = () => {
@@ -38,7 +39,7 @@ const Header = () => {
       {/* Navigation */}
       <nav className="relative max-w-7xl mx-auto flex items-center justify-end space-x-12 p-8">
         <NavLink
-          href="#"
+          href="/"
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -140,18 +141,18 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <a
-                    href="#"
+                  <Link
+                    to="/signup"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Sign Up
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="/signin"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Sign In
-                  </a>
+                  </Link>
                 </>
               )}
             </div>
