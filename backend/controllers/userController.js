@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 // Register a new user
 const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     try {
         const userExists = await User.findOne({ email });
@@ -12,19 +12,19 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        const user = await User.create({ name, email, password });
-        if (user) {
-            res.status(201).json({
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                token: generateToken(user.id),
-            });
-        } else {
-            res.status(400).json({ message: 'Invalid user data' });
-        }
+        const user = new User({ firstName, lastName, email, password });
+        await user.save();
+
+        res.status(201).json({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            token: generateToken(user.id),
+        });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error(error); // Log the error
+        res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 };
 
@@ -37,7 +37,8 @@ const loginUser = async (req, res) => {
         if (user && (await bcrypt.compare(password, user.password))) {
             res.json({
                 id: user.id,
-                name: user.name,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 token: generateToken(user.id),
             });
@@ -45,7 +46,8 @@ const loginUser = async (req, res) => {
             res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error(error); // Log the error
+        res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 };
 

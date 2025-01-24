@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -14,6 +15,14 @@ app.use(cors());
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Root Route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
 
 // Server
 const PORT = process.env.PORT || 5000;

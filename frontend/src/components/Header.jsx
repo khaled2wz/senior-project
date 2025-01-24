@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavLink = ({ href, icon, children }) => (
   <Link
@@ -13,8 +13,18 @@ const NavLink = ({ href, icon, children }) => (
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -28,6 +38,13 @@ const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [handleClickOutside]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   return (
     <header className="relative z-50 bg-gray-800 text-gray-100">
@@ -107,20 +124,24 @@ const Header = () => {
             className="flex items-center p-2 rounded transition duration-300 hover:bg-gray-700 hover:scale-105"
             aria-expanded={isDropdownOpen}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 14c-3.866 0-7 3.134-7 7h14c0-3.866-3.134-7-7-7zM12 10a4 4 0 100-8 4 4 0 000 8z"
-              />
-            </svg>
+            {isLoggedIn ? (
+              <span className="mr-2">{user.lastName}</span>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 14c-3.866 0-7 3.134-7 7h14c0-3.866-3.134-7-7-7zM12 10a4 4 0 100-8 4 4 0 000 8z"
+                />
+              </svg>
+            )}
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
@@ -134,6 +155,7 @@ const Header = () => {
                   </a>
                   <a
                     href="#"
+                    onClick={handleLogout}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Logout

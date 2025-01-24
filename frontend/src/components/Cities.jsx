@@ -5,10 +5,10 @@ import KhobarImage from "./images/Khobar.jpg";
 import NeomImage from "./images/Neom.jpg";
 
 const cities = [
-  { name: "Residential Care Project in Riyadh", image: RiyadhImage },
-  { name: "Concert Hall in Jeddah", image: JeddahImage },
-  { name: "Modern Hotel in Khobar", image: KhobarImage },
-  { name: "Future City in Neom", image: NeomImage },
+  { name: "Riyadh", image: RiyadhImage },
+  { name: "Jeddah", image: JeddahImage },
+  { name: "Khobar", image: KhobarImage },
+  { name: "Neom", image: NeomImage },
 ];
 
 const Cities = () => {

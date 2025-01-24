@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle sign-in logic here
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
+        email,
+        password,
+      });
+      localStorage.setItem('user', JSON.stringify(response.data));
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to sign in');
+    }
   };
 
   return (
@@ -39,6 +51,7 @@ const SignIn = () => {
       <div className="flex-1 flex justify-center items-center">
         <form onSubmit={handleSubmit} className="bg-gray-700 p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold text-white mb-6">Sign In</h2>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <div className="mb-4">
             <label className="block text-gray-300 mb-2" htmlFor="email">Email</label>
             <input
