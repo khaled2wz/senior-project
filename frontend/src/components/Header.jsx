@@ -118,7 +118,7 @@ const Header = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M5.121 17.804A9 9 0 1117.804 5.121M12 7v5l3 3"
+                d="M12 14c-3.866 0-7 3.134-7 7h14c0-3.866-3.134-7-7-7zM12 10a4 4 0 100-8 4 4 0 000 8z"
               />
             </svg>
           </button>
