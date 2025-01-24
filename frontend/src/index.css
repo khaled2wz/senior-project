@@ -1,15 +1,15 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
- 
+
 :root {
-    background-color: #1f2937; /* Tailwind's bg-gray-800 */
-    background-image: linear-gradient(
-      to bottom,
-      #374151, /* Tailwind's bg-gray-700 */
-      #1f2937, /* Tailwind's bg-gray-800 */
-      #111827  /* Tailwind's bg-gray-900 */
-    );
-    color: #f9fafb; /* Tailwind's text-gray-100 (light text for contrast) */
-    font-family: 'Inter', sans-serif; /* Optional modern font for UI consistency */
-  }
+  background-color: #1a202c; /* Tailwind's bg-gray-900 */
+  background-image: linear-gradient(
+    to bottom,
+    #2d3748, /* Tailwind's bg-gray-800 */
+    #4a5568, /* Tailwind's bg-gray-700 */
+    #718096  /* Tailwind's bg-gray-600 */
+  );
+  color: #e2e8f0; /* Tailwind's text-gray-200 (light text for contrast) */
+  font-family: 'Inter', sans-serif; /* Optional modern font for UI consistency */
+}
