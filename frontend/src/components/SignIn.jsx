@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import '../../style/SignIn.css';
+import Header from './Header';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,12 +24,13 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-800 relative">
-      <div className="absolute top-4 right-4">
-        <Link to="/" className="text-white transition">
+    <div className="signin-container">
+      <Header />
+      <div className="home-link">
+        <Link to="/" className="home-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
+            className="home-svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -42,39 +44,37 @@ const SignIn = () => {
           </svg>
         </Link>
       </div>
-      <div className="flex-1 flex justify-center items-center text-white">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold">Welcome</h1>
-          <h1 className="text-4xl font-bold">Back!</h1>
+      <div className="welcome-section">
+        <div className="welcome-text">
+          <h1>Welcome</h1>
+          <h1>Back!</h1>
         </div>
       </div>
-      <div className="flex-1 flex justify-center items-center">
-        <form onSubmit={handleSubmit} className="bg-gray-700 p-8 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold text-white mb-6">Sign In</h2>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2" htmlFor="email">Email</label>
+      <div className="signin-form-container">
+        <form onSubmit={handleSubmit} className="signin-form">
+          <h2>Sign In</h2>
+          {error && <p className="error-text">{error}</p>}
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-300 mb-2" htmlFor="password">Password</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <button type="submit" className="w-full bg-teal-500 p-2 rounded text-white transition">Sign In</button>
+          <button type="submit" className="signin-button">Sign In</button>
         </form>
       </div>
     </div>

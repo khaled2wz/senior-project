@@ -1,187 +1,60 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Dropdown, Navbar, Nav, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import '../../style/Header.css'; // External CSS file for custom styles
 
-const NavLink = ({ href, icon, children }) => (
-  <Link
-    to={href}
-    className="flex items-center p-2 rounded transition duration-300 hover:bg-gray-200 hover:scale-105"
-  >
-    {icon}
-    {children}
-  </Link>
-);
+const Header = ({ isLoggedIn }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-  const handleClickOutside = useCallback((event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [handleClickOutside]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-    setIsLoggedIn(false);
-    navigate('/');
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
-    <header className="relative z-50 bg-gray-800 text-gray-100">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gray-600 rounded-full blur-3xl opacity-20 transform -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-600 rounded-full blur-3xl opacity-20 transform translate-x-1/2 translate-y-1/2"></div>
+    <Navbar bg="light" expand="lg" className="px-4 shadow">
+      {/* Left Side: Logo Button */}
+      <Button
+        variant="link"
+        className="navbar-brand logo-btn"
+        onClick={() => (window.location.href = "/")}
+      >
+        <span className="logo-placeholder">Logo</span>
+      </Button>
 
-      {/* Navigation */}
-      <nav className="relative max-w-7xl mx-auto flex items-center justify-end space-x-12 p-8">
-        <NavLink
-          href="/"
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"
-              />
-            </svg>
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
-          href="#"
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 20l-5.447-2.724A2 2 0 013 15.382V8.618a2 2 0 011.553-1.894L9 4m6 0l5.447 2.724A2 2 0 0121 8.618v6.764a2 2 0 01-1.553 1.894L15 20m-6 0v-6m6 6v-6m-6 0h6"
-              />
-            </svg>
-          }
-        >
+      {/* Center: Navigation Links */}
+      <Nav className="mx-auto">
+        <Nav.Link href="/destination" className="mx-2">
           Destination
-        </NavLink>
-        <NavLink
-          href="#"
-          icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m-7 4h8a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v11a2 2 0 002 2z"
-              />
-            </svg>
-          }
-        >
+        </Nav.Link>
+        <Nav.Link href="/about" className="mx-2">
           About
-        </NavLink>
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center p-2 rounded transition duration-300 hover:bg-gray-700 hover:scale-105"
-            aria-expanded={isDropdownOpen}
-          >
-            {isLoggedIn ? (
-              <span className="mr-2">{user.lastName}</span>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 14c-3.866 0-7 3.134-7 7h14c0-3.866-3.134-7-7-7zM12 10a4 4 0 100-8 4 4 0 000 8z"
-                />
-              </svg>
-            )}
-          </button>
-          {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-              {isLoggedIn ? (
-                <>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Account
-                  </a>
-                  <a
-                    href="#"
-                    onClick={handleLogout}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Logout
-                  </a>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/signup"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Sign Up
-                  </Link>
-                  <Link
-                    to="/signin"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Sign In
-                  </Link>
-                </>
-              )}
-            </div>
+        </Nav.Link>
+      </Nav>
+
+      {/* Right Side: Account Dropdown */}
+      <Dropdown align="end" show={dropdownOpen} onToggle={toggleDropdown}>
+        <Dropdown.Toggle
+          variant="link"
+          id="account-dropdown"
+          className="d-flex align-items-center account-icon"
+        >
+          <i className="bi bi-person-circle fs-4"></i>
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {isLoggedIn ? (
+            <>
+              <Dropdown.Item href="/account">Account</Dropdown.Item>
+              <Dropdown.Item href="/logout">Sign Out</Dropdown.Item>
+            </>
+          ) : (
+            <>
+              <Dropdown.Item href="/signin">Sign In</Dropdown.Item>
+              <Dropdown.Item href="/signup">Sign Up</Dropdown.Item>
+            </>
           )}
-        </div>
-      </nav>
-    </header>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Navbar>
   );
 };
 

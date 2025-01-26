@@ -4,15 +4,16 @@ import Footer from './components/Footer';
 import Hero from './components/Hero';
 import Cities from './components/Cities';
 import Activities from './components/Activities';
+import './App.css';
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="app-container">
       <Header />
-      <main className="flex-grow">
+      <main className="app-main">
         <Hero />
         <Cities />
-        <Activities />  
+        <Activities />
       </main>
       <Footer />
     </div>

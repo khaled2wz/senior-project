@@ -1,21 +1,22 @@
 import React from "react";
+import '../../style/Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+    <footer className="footer">
+      <div className="footer-container">
         {/* Footer Links */}
-        <div className="flex space-x-4 mb-4 md:mb-0">
+        <div className="footer-links">
           <a
             href="#"
-            className="footer-link hover:text-teal-500 transition duration-300"
+            className="footer-link"
             aria-label="Close"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="footer-icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -32,12 +33,12 @@ const Footer = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="footer-link hover:text-teal-500 transition duration-300"
+            className="footer-link"
             aria-label="Instagram"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="footer-icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -53,7 +54,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Copyright */}
-        <div className="text-sm">
+        <div className="footer-copyright">
           &copy; {currentYear} Your Company
         </div>
       </div>

@@ -1,0 +1,101 @@
+/* Sign Up Page Styles */
+.signup-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #212529; /* Equivalent to bg-gray-800 */
+    position: relative;
+  }
+  
+  .home-link {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .home-icon {
+    color: #f8f9fa; /* Equivalent to text-white */
+    transition: color 0.3s ease;
+  }
+  
+  .home-icon:hover {
+    color: #38b2ac; /* Equivalent to teal-500 */
+  }
+  
+  .home-svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .welcome-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f8f9fa; /* Equivalent to text-white */
+  }
+  
+  .welcome-text h1 {
+    font-size: 2.5rem; /* Equivalent to text-4xl */
+    font-weight: 700;
+  }
+  
+  .signup-form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-form {
+    background-color: #343a40; /* Equivalent to bg-gray-700 */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 24rem; /* Equivalent to max-w-md */
+    color: #f8f9fa; /* Equivalent to text-white */
+  }
+  
+  .signup-form h2 {
+    font-size: 1.5rem; /* Equivalent to text-2xl */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  
+  .error-text {
+    color: #e53e3e; /* Equivalent to text-red-500 */
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #adb5bd; /* Equivalent to text-gray-300 */
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #495057; /* Equivalent to bg-gray-600 */
+    color: #f8f9fa; /* Equivalent to text-white */
+    outline: none;
+  }
+  
+  .signup-button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #38b2ac; /* Equivalent to teal-500 */
+    color: #f8f9fa; /* Equivalent to text-white */
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #319795; /* Darker teal for hover */
+  }
+  

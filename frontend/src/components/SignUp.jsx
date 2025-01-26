@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../../style/SignUp.css';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -22,7 +23,9 @@ const SignUp = () => {
     }
 
     if (!passwordRegex.test(password)) {
-      setError('Password must be at least 8 characters long, contain at least one uppercase letter, and one number.');
+      setError(
+        'Password must be at least 8 characters long, contain at least one uppercase letter, and one number.'
+      );
       return;
     }
 
@@ -46,12 +49,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-800 relative">
-      <div className="absolute top-4 right-4">
-        <Link to="/" className="text-white transition">
+    <div className="signup-container">
+      <div className="home-link">
+        <Link to="/" className="home-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
+            className="home-svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -65,72 +68,69 @@ const SignUp = () => {
           </svg>
         </Link>
       </div>
-      <div className="flex-1 flex justify-center items-center text-white">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold">Start Your</h1>
-          <h1 className="text-4xl font-bold">Journey!</h1>
+      <div className="welcome-section">
+        <div className="welcome-text">
+          <h1>Start Your</h1>
+          <h1>Journey!</h1>
         </div>
       </div>
-      <div className="flex-1 flex justify-center items-center">
-        <form onSubmit={handleSubmit} className="bg-gray-700 p-8 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold text-white mb-6">Sign Up</h2>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2" htmlFor="firstName">First Name</label>
+      <div className="signup-form-container">
+        <form onSubmit={handleSubmit} className="signup-form">
+          <h2>Sign Up</h2>
+          {error && <p className="error-text">{error}</p>}
+          <div className="form-group">
+            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
               id="firstName"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2" htmlFor="lastName">Last Name</label>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
               id="lastName"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2" htmlFor="email">Email</label>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2" htmlFor="password">Password</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-300 mb-2" htmlFor="confirmPassword">Confirm Password</label>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               type="password"
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-2 rounded bg-gray-600 text-white"
               required
             />
           </div>
-          <button type="submit" className="w-full bg-teal-500 p-2 rounded text-white transition">Sign Up</button>
+          <button type="submit" className="signup-button">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>
