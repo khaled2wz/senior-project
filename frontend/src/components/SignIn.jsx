@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/SignIn.css';
 import Header from './Header';
+import Footer from './Footer';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,24 +27,7 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <Header />
-      <div className="home-link">
-        <Link to="/" className="home-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="home-svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"
-            />
-          </svg>
-        </Link>
-      </div>
+     
       <div className="welcome-section">
         <div className="welcome-text">
           <h1>Welcome</h1>
@@ -77,6 +61,7 @@ const SignIn = () => {
           <button type="submit" className="signin-button">Sign In</button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

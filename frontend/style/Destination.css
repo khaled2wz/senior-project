@@ -1,0 +1,65 @@
+/* Destination.css */
+.destination-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .destination-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #495057;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #212529;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .card-text.text-muted {
+    color: #6c757d;
+  }
+  
+  .container {
+    max-width: 1200px;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 576px) {
+    .destination-title {
+      font-size: 2rem;
+    }
+  
+    .section-title {
+      font-size: 1.25rem;
+    }
+  }
+  
