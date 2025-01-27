@@ -23,7 +23,7 @@ const Header = ({ isLoggedIn }) => {
 
       {/* Center: Navigation Links */}
       <Nav className="mx-auto">
-        <Nav.Link href="/destination" className="mx-2">
+        <Nav.Link href="/Destination" className="mx-2">
           Destination
         </Nav.Link>
         <Nav.Link href="/about" className="mx-2">

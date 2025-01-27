@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/SignUp.css';
+import Header from './Header';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -49,24 +50,11 @@ const SignUp = () => {
   };
 
   return (
+    
     <div className="signup-container">
+    <Header />
       <div className="home-link">
-        <Link to="/" className="home-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="home-svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"
-            />
-          </svg>
-        </Link>
+        
       </div>
       <div className="welcome-section">
         <div className="welcome-text">

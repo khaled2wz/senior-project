@@ -1,5 +1,6 @@
 /* Sign Up Page Styles */
 .signup-container {
+  flex-direction: column;
     display: flex;
     min-height: 100vh;
     background-color: #212529; /* Equivalent to bg-gray-800 */
