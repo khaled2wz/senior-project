@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import '../../style/About.css'; // External CSS file for custom styles
+import '../../style/About.css';  
 
 const About = () => {
   return (
-    <div className="about-container">
+    <div className="about-container d-flex flex-column min-vh-100 bg-dark text-light">
       <Header />
       <div className="container my-5">
         <div className="row justify-content-center">

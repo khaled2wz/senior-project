@@ -1,107 +1,67 @@
 /* Activities Section */
 .activities-section {
-    background-color: #212529;
-    color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-  }
-  
-  .activities-header {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .activities-title {
-    font-size: 1.875rem; /* Equivalent to text-3xl */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-  }
-  
-  .activities-subtitle {
-    color: #adb5bd;
-    font-size: 0.875rem; /* Equivalent to text-sm */
-    margin-top: 0.25rem;
-  }
-  
-  .activities-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    width: 100%;
-    max-width: 80rem; /* Equivalent to max-w-5xl */
-  }
-  
-  @media (min-width: 640px) {
-    .activities-grid {
-      grid-template-columns: repeat(2, 1fr); /* Equivalent to sm:grid-cols-2 */
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .activities-grid {
-      grid-template-columns: repeat(3, 1fr); /* Equivalent to lg:grid-cols-3 */
-    }
-  }
-  
+  padding: 60px 15px;
+  background-color: #212529; /* Light background */
+  text-align: center;
+}
+
+/* Section Header */
+.activities-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40; /* Dark text */
+}
+
+.activities-subtitle {
+  font-size: 1.2rem;
+  color: #6c757d; /* Greyish text */
+}
+
+/* Activities Grid */
+.activities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Activity Card */
+.activity-card {
+  margin: 20px;
+  position: relative;
+  background: rgb(32, 29, 29);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Activity Card Content */
+.activity-card-content {
+  padding: 25px;
+  text-align: center;
+}
+
+.activity-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f1f1; /* Bootstrap primary blue */
+  margin-bottom: 10px;
+}
+
+.activity-card-description {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .activity-card {
-    position: relative;
-    background-color: #343a40;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    transform: scale(1);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    margin-bottom: 20px;
   }
-  
-  .activity-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
-  }
-  
-  .activity-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
-    opacity: 0.8;
-    transition: opacity 0.5s ease;
-  }
-  
-  .activity-card:hover .activity-card-overlay {
-    opacity: 1;
-  }
-  
-  .activity-card-content {
-    position: relative;
-    height: 16rem; /* Equivalent to h-64 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1rem;
-  }
-  
-  .activity-card-title {
-    font-size: 1.25rem; /* Equivalent to text-xl */
-    font-weight: 700;
-    color: #f8f9fa;
-    transition: color 0.3s ease;
-  }
-  
-  .activity-card:hover .activity-card-title {
-    color: #ffc107; /* Equivalent to text-yellow-400 */
-  }
-  
-  .activity-card-description {
-    color: #adb5bd;
-    font-size: 0.875rem; /* Equivalent to text-sm */
-    margin-top: 0.25rem;
-    transition: color 0.3s ease;
-  }
-  
-  .activity-card:hover .activity-card-description {
-    color: #e9ecef;
-  }
-  
+}

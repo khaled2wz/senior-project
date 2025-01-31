@@ -2,7 +2,7 @@ import React from "react";
 import '../../style/Hero.css';
 
 const HeroCard = ({ title, description }) => (
-  <a href="#" className="hero-card">
+  <a href="#" className="hero-card card bg-dark text-light p-4 mb-4">
     <h2 className="hero-card-title">{title}</h2>
     <p className="hero-card-description">{description}</p>
   </a>
@@ -10,36 +10,42 @@ const HeroCard = ({ title, description }) => (
 
 const Hero = () => {
   return (
-    <section className="hero-section">
+    <section className="hero-section text-center py-5 bg-dark text-light">
       {/* Decorative Elements */}
       <div className="hero-bg"></div>
       <div className="hero-blur top-left"></div>
       <div className="hero-blur bottom-right"></div>
 
       {/* Content */}
-      <div className="hero-content">
-        <h1 className="hero-title">Explore the World</h1>
-        <div className="hero-grid">
-          <HeroCard
-            title="Places to Visit"
-            description="Discover the best destinations around the world."
-          />
-          <HeroCard
-            title="Activities"
-            description="Find exciting activities for your adventures."
-          />
-          <HeroCard
-            title="Get Inspired"
-            description="Explore stories and ideas to inspire your travels."
-          />
+      <div className="hero-content container">
+        <h1 className="hero-title mb-4">Explore the World</h1>
+        <div className="hero-grid row">
+          <div className="col-md-4">
+            <HeroCard
+              title="Places to Visit"
+              description="Discover the best destinations around the world."
+            />
+          </div>
+          <div className="col-md-4">
+            <HeroCard
+              title="Activities"
+              description="Find exciting activities for your adventures."
+            />
+          </div>
+          <div className="col-md-4">
+            <HeroCard
+              title="Get Inspired"
+              description="Explore stories and ideas to inspire your travels."
+            />
+          </div>
         </div>
-        <div className="hero-search">
+        <div className="hero-search mt-4 d-flex justify-content-center">
           <input
             type="text"
             placeholder="Search..."
-            className="search-input"
+            className="form-control me-2"
           />
-          <button className="search-button">
+          <button className="btn btn-outline-light">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon"

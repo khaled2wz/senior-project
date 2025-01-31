@@ -5,13 +5,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer">
-      <div className="footer-container">
+    <footer className="footer bg-dark text-light py-4">
+      <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         {/* Footer Links */}
-        <div className="footer-links">
+        <div className="footer-links d-flex mb-3 mb-md-0">
           <a
             href="#"
-            className="footer-link"
+            className="footer-link text-light me-3"
             aria-label="Close"
           >
             <svg
@@ -33,7 +33,7 @@ const Footer = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="footer-link"
+            className="footer-link text-light"
             aria-label="Instagram"
           >
             <svg
@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Copyright */}
-        <div className="footer-copyright">
+        <div className="footer-copyright text-center text-md-start">
           &copy; {currentYear} Your Company
         </div>
       </div>

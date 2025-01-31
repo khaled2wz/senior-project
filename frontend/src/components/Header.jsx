@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown, Navbar, Nav, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../../style/Header.css'; // External CSS file for custom styles
 
 const Header = ({ isLoggedIn }) => {
@@ -11,7 +12,7 @@ const Header = ({ isLoggedIn }) => {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="px-4 shadow">
+    <Navbar bg="dark" variant="dark" expand="lg" className="px-4 shadow">
       {/* Left Side: Logo Button */}
       <Button
         variant="link"
@@ -28,6 +29,9 @@ const Header = ({ isLoggedIn }) => {
         </Nav.Link>
         <Nav.Link href="/about" className="mx-2">
           About
+        </Nav.Link>
+        <Nav.Link as={Link} to="/add-activity" className="mx-2"> {/* Add this link */}
+          Add Activity
         </Nav.Link>
       </Nav>
 

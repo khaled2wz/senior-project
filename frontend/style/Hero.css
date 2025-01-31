@@ -1,174 +1,105 @@
-/* Hero Section Styles */
+/* Hero Section */
 .hero-section {
-    position: relative;
-    padding: 3rem 0;
-    background-color: #343a40;
-    color: #f8f9fa;
-    text-align: center;
-    overflow: hidden;
-    margin-top: -1rem;
-  }
-  
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, #343a40, #212529, #343a40);
-  }
-  
-  .hero-blur {
-    position: absolute;
-    width: 24rem;
-    height: 24rem;
-    background-color: #6c757d;
-    border-radius: 50%;
-    filter: blur(10rem);
-    opacity: 0.2;
-  }
-  
-  .hero-blur.top-left {
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-  }
-  
-  .hero-blur.bottom-right {
-    bottom: 0;
-    right: 0;
-    transform: translate(50%, 50%);
-  }
-  
-  .hero-content {
-    position: relative;
-    max-width: 64rem;
-    margin: 0 auto;
-  }
-  
+  position: relative;
+  background: #212529;
+  color: #f8f9fa;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Decorative Elements */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
+  z-index: 0;
+}
+
+.hero-blur {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 0;
+}
+
+.top-left {
+  top: 10%;
+  left: 5%;
+}
+
+.bottom-right {
+  bottom: 10%;
+  right: 5%;
+}
+
+/* Content Styling */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Hero Card */
+.hero-card {
+  display: block;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.hero-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card-description {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Search Bar */
+.hero-search input {
+  width: 250px;
+  border-radius: 5px;
+}
+
+.hero-search .btn {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .hero-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 2rem;
+    font-size: 2rem;
   }
-  
   .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    flex-direction: column;
   }
-  
-  @media (min-width: 768px) {
-    .hero-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
   .hero-card {
-    display: block;
-    padding: 1.5rem;
-    background-color: #495057;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 1rem;
   }
-  
-  .hero-card:hover {
-    transform: scale(1.05);
-    background-color: #343a40;
-  }
-  
-  .hero-card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #f8f9fa;
-  }
-  
-  .hero-card-description {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: #adb5bd;
-  }
-  
-  .hero-search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    gap: 1rem;
-  }
-  
-  .search-input {
-    width: 100%;
-    max-width: 24rem;
-    padding: 0.5rem 1rem;
-    color: #495057;
-    border-radius: 0.5rem;
-    outline: none;
-  }
-  
-  .search-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: #495057;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-  }
-  
-  .search-button:hover {
-    background-color: #343a40;
-  }
-  
-  .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: #f8f9fa;
-  }
-  a {
-    text-decoration: none;
-    color: inherit; /* Ensures the color matches the surrounding text */
-  }
-  
- a:hover{
-    text-decoration:solid;
- }
- .carousel-controls {
-    display: flex;
-    justify-content: space-between; /* Place arrows at edges */
-    align-items: center;
-    position: relative; /* Relative positioning for precise placement */
-    width: 100%; /* Ensure full-width alignment */
-    max-width: 90rem; /* Matches the carousel width */
-    margin-top: 2rem; /* Space between cards and controls */
-    padding: 0 2rem; /* Add padding for spacing */
-    z-index: 10;
-  }
-  
-  .carousel-arrow {
-    background: rgba(255, 255, 255, 0.1); /* Light transparent background */
-    border: 2px solid #495057;
-    color: #f8f9fa;
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .carousel-arrow:hover {
-    background: #495057;
-    transform: scale(1.1);
-    border-color: #adb5bd; /* Softer hover border */
-  }
-  
-  .arrow-icon {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .carousel-arrow:hover .arrow-icon {
-    transform: translateY(-2px); /* Subtle motion effect */
-  }
-  
+}

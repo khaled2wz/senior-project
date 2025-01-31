@@ -1,164 +1,69 @@
-/* Cities Section */
+ /* Cities Section */
+ .cities-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 20px;
+   background-color:#212529 ;
+   color: #f8f9fa;
+   text-transform: capitalize;
+  top: 50%;
+  left: 50%;
+ 
+}
+
+
+/* Elegant Gradient Underline */
+.cities-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(to right, #4c6fb1, #000000); /* Smooth color transition */
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
 .cities-section {
-    background: linear-gradient(to bottom, #000, #1c1c1c);
-    color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 6rem 2rem;
-    position: relative;
-    overflow: hidden; /* Ensure no unexpected overflow */
-    min-height: 60rem;
-    z-index: 1; /* Lower than cards to prevent overlapping */
-  }
+  padding: 2rem 0;
   
-  /* Carousel Container */
-  .carousel-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 95%; /* Add padding around the container */
-    height: auto;
-    z-index: 5; /* Ensure it's above the section background */
-    overflow: visible; /* Prevent content from being clipped */
-    padding: 0 2rem; /* Space on left and right */
-  }
+  background-color: #212529;
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
   
-  /* Carousel Cards */
-  .carousel-cards {
-    display: flex;
-    align-items: center;
-    gap: 2rem; /* Space between cards */
-    width: 100%; /* Full width for alignment */
-    max-width: 90rem;
-    overflow: hidden; /* Hide extra cards */
-    position: relative;
-    padding: 0 2rem; /* Add padding around the cards */
-    z-index: 10; /* Ensure cards appear above everything else */
-  }
-  
-  /* Individual Cards */
-  .carousel-card {
-    flex: 0 0 calc(25% - 2rem); /* Show exactly 4 cards */
-    max-width: calc(25% - 2rem);
-    height: 34rem;
-    transition: transform 0.7s ease, opacity 0.7s ease;
-    border-radius: 1.2rem;
-    position: relative;
-    z-index: 15; /* Cards should always be above other elements */
-  }
-  
-  .carousel-card.active {
-    transform: scale(1.1);
-    z-index: 20; /* Active card is above inactive ones */
-  }
-  
-  .carousel-card.inactive {
-    transform: scale(0.9);
-    opacity: 0.6;
-  }
-  
-  /* Pseudo-Element Fix (Remove Overlap) */
-  .cities-section::before,
-  .cities-section::after {
-    content: none; /* Disable any pseudo-elements that might overlap */
-  }
-  
-  /* Card Content */
-  .card-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 1rem;
-    overflow: hidden;
-    background: #343a40;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
-    transition: transform 0.5s ease, box-shadow 0.3s ease;
-  }
-  
-  .card-content:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.5);
-  }
-  
-  .city-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  
-  .card-content:hover .city-image {
-    transform: scale(1.1);
-  }
-  
-  .gradient-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    z-index: 5; /* Ensure it's below card content */
-  }
-  
-  .city-name {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    font-size: 1.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #f8f9fa;
-    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
-    transition: color 0.3s ease;
-  }
-  
-  .card-content:hover .city-name {
-    color: #adb5bd;
-  }
-  
-  /* Carousel Controls */
-  .carousel-controls {
-    display: flex;
-    justify-content: space-between; /* Space arrows apart */
-    align-items: center;
-    width: 100%;
-    max-width: 90rem; /* Matches the card width */
-    margin-top: 2rem; /* Add space between cards and controls */
-    padding: 0 2rem; /* Ensure arrows have space on edges */
-    z-index: 15; /* Ensure arrows are above the cards */
-  }
-  
-  /* Arrows */
-  .carousel-arrow {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid #495057;
-    color: #f8f9fa;
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    z-index: 20; /* Ensure arrows are always above cards */
-  }
-  
-  .carousel-arrow:hover {
-    background: #495057;
-    transform: scale(1.1);
-    border-color: #adb5bd;
-  }
-  
-  .arrow-icon {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .carousel-arrow:hover .arrow-icon {
-    transform: translateY(-2px);
-  }
-  
+}
+
+.city-card {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.city-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+.city-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.city-name {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: #f8f9fa;
+  text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+  font-size: 1.25rem;
+  font-weight: bold;
+}

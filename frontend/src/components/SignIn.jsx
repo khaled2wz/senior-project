@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../style/SignIn.css';
 import Header from './Header';
 import Footer from './Footer';
+
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +18,7 @@ const SignIn = () => {
         email,
         password,
       });
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', response.data.token);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to sign in');
@@ -27,39 +28,46 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <Header />
-     
-      <div className="welcome-section">
-        <div className="welcome-text">
-          <h1>Welcome</h1>
-          <h1>Back!</h1>
+      <div className="signin-content">
+        <div className="welcome-section">
+          <h1>Welcome Back!</h1>
         </div>
-      </div>
-      <div className="signin-form-container">
-        <form onSubmit={handleSubmit} className="signin-form">
-          <h2>Sign In</h2>
-          {error && <p className="error-text">{error}</p>}
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="signin-button">Sign In</button>
-        </form>
+        <div className="signin-form-container">
+          <form onSubmit={handleSubmit} className="signin-form">
+            <h2 className="text-center mb-4">Sign In</h2>
+            {error && <p className="alert alert-danger">{error}</p>}
+            <div className="form-group mb-3">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="form-group mb-4">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">Sign In</button>
+            <div className="text-center mt-3">
+              <Link to="/forgot-password" className="text-primary">Forgot my password</Link>
+            </div>
+            <div className="text-center mt-3">
+              <span>Don't have an account? </span>
+              <Link to="/signup" className="text-primary">Sign up</Link>
+            </div>
+          </form>
+        </div>
       </div>
       <Footer />
     </div>
