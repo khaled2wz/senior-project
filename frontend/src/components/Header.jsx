@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Dropdown, Navbar, Nav, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import '../../style/Header.css'; // External CSS file for custom styles
+import { Link } from 'react-router-dom';
+import '../../style/Header.css';
+import { UserContext } from './UserContext';
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
+  const { user, signOut } = useContext(UserContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -30,7 +32,7 @@ const Header = ({ isLoggedIn }) => {
         <Nav.Link href="/about" className="mx-2">
           About
         </Nav.Link>
-        <Nav.Link as={Link} to="/add-activity" className="mx-2"> {/* Add this link */}
+        <Nav.Link as={Link} to="/add-activity" className="mx-2">
           Add Activity
         </Nav.Link>
       </Nav>
@@ -45,10 +47,10 @@ const Header = ({ isLoggedIn }) => {
           <i className="bi bi-person-circle fs-4"></i>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {isLoggedIn ? (
+          {user ? (
             <>
               <Dropdown.Item href="/account">Account</Dropdown.Item>
-              <Dropdown.Item href="/logout">Sign Out</Dropdown.Item>
+              <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
             </>
           ) : (
             <>
