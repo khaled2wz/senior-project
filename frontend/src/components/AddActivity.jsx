@@ -103,6 +103,24 @@ const AddActivity = () => {
               <option value="Mecca">Mecca</option>
               <option value="Medina">Medina</option>
               <option value="Al-Ula">Al-Ula</option>
+              <option value="Khobar">Khobar</option>
+              <option value="Dammam">Dammam</option>
+              <option value="Abha">Abha</option>
+              <option value="Neom">Neom</option>
+              <option value="Tabuk">Tabuk</option>
+              <option value="Qassim">Qassim</option>
+              <option value="Hail">Hail</option>
+              <option value="Jizan">Jizan</option>
+              <option value="Najran">Najran</option>
+              <option value="Taif">Taif</option>
+              <option value="Al-Baha">Al-Baha</option>
+              <option value="Jubail">Jubail</option>
+              <option value="Hafr Al-Batin">Hafr Al-Batin</option>
+              <option value="Arar">Arar</option>
+              <option value="Sakaka">Sakaka</option>
+              <option value="Al-Ahsa">Al-Ahsa</option>
+              <option value="Al-Kharj">Al-Kharj</option>
+              <option value="Al-Ghat">Al-Ghat</option>
             </select>
           </div>
 

@@ -14,7 +14,7 @@ const activitySchema = new mongoose.Schema(
     locationCity: {
       type: String,
       required: [true, "City is required"],
-      enum: ["Riyadh", "Jeddah", "Mecca", "Medina", "Al-Ula"],
+      enum: ["Riyadh", "Jeddah", "Mecca", "Medina", "Al-Ula", "Khobar", "Dammam", "Abha", "Neom","Tabuk","Qassim","Hail","Jizan","Najran","Taif","Al-Baha","Jubail","Hafr Al-Batin","Arar","Sakaka","Al-Ahsa","Al-Kharj","Al-Ghat"],
     },
     type: {
       type: [String],
