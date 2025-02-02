@@ -1,5 +1,9 @@
 # Ignore environment files
-backend/.env
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Ignore node_modules directory
 node_modules/
@@ -10,13 +14,24 @@ node_modules/
 # Ignore build output
 dist/
 dist-ssr/
+build/
+
+# Ignore coverage reports
+coverage/
 
 # Ignore editor directories and files
-.vscode/*
-.idea
+.vscode/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore operating system files
+Thumbs.db

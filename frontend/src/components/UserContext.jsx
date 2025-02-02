@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const UserContext = createContext();
 
@@ -8,10 +9,22 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      const user = JSON.parse(atob(token.split('.')[1]));
-      setUser(user);
+      fetchUserData(token);
     }
   }, []);
+
+  const fetchUserData = async (token) => {
+    try {
+      const response = await axios.get('/api/users/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error('Failed to fetch user data', error);
+    }
+  };
 
   const signOut = () => {
     localStorage.removeItem('token');
@@ -19,7 +32,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, signOut }}>
+    <UserContext.Provider value={{ user, setUser, signOut, fetchUserData }}>
       {children}
     </UserContext.Provider>
   );

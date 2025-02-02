@@ -3,11 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Destination from './components/Destination.jsx';
-import About from './components/about';
-import AddActivity from './components/AddActivity';
+import SignIn from './Pages/SignIn';
+import SignUp from './Pages/SignUp';
+import Destination from './Pages/Destination.jsx';
+import About from './Pages/about';
+import AddActivity from './Pages/AddActivity';
+import Account from './Pages/Account'; // Import the Account component
 import { UserProvider } from './components/UserContext';
 
 createRoot(document.getElementById('root')).render(
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/Destination" element={<Destination />} />
           <Route path="/about" element={<About />} />
           <Route path="/add-activity" element={<AddActivity />} />
+          <Route path="/account" element={<Account />} /> {/* Add this line */}
         </Routes>
       </UserProvider>
     </BrowserRouter>

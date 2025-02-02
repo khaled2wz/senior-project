@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../style/Destination.css"; // Ensure this file exists and matches the path
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Destination = () => {
   const [activities, setActivities] = useState([]);
@@ -39,16 +39,18 @@ const Destination = () => {
         {error && <div className="alert alert-danger">{error}</div>}
         {Object.keys(groupedActivities).map((city) => (
           <div key={city} className="city-section">
-            <h3 className="city-title">{city}</h3>
+            <h3 className="section-title">{city}</h3>
             <div className="row">
               {groupedActivities[city].map((activity, idx) => (
                 <div key={idx} className="col-md-6 col-lg-4 col-xl-3 mb-4">
-                  <div className="card shadow-sm">
+                  <div className="card">
+                    {/* Image */}
                     <img
                       src={activity.pictureUrl}
                       className="card-img-top"
                       alt={activity.name}
                     />
+                    {/* Card Content */}
                     <div className="card-body">
                       <h5 className="card-title">{activity.name}</h5>
                       <p className="card-text">{activity.description}</p>
@@ -62,6 +64,7 @@ const Destination = () => {
                       <p className="card-text">
                         <strong>Duration:</strong> {activity.durationHours} hours
                       </p>
+                      <p className="card-text">{activity.additionalDetails}</p>
                     </div>
                   </div>
                 </div>

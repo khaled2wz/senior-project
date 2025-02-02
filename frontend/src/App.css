@@ -2,9 +2,53 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;  
+  min-height: 100vh;
 }
 
 .app-main {
-  flex-grow: 1;  
+  flex-grow: 1;
+}
+
+/* Custom Global Styles */
+body {
+  background-color: #ffffff; /* Tailwind's bg-gray-900 */
+  color: #e2e8f0; /* Tailwind's text-gray-200 */
+  font-family: 'Inter', sans-serif; /* Optional modern font for UI consistency */
+}
+
+.navbar {
+  background-color: #343a40; /* Bootstrap's bg-dark */
+}
+
+.nav-link {
+  color: #e2e8f0 !important; /* Light text for contrast */
+}
+
+.nav-link:hover {
+  color: #adb5bd !important; /* Softer hover color */
+}
+
+.footer {
+  background-color: #212529; /* Equivalent to bg-gray-900 */
+  color: #f8f9fa; /* Equivalent to text-white */
+  padding: 1.5rem 0; /* Equivalent to py-6 */
+}
+
+.footer-link {
+  color: #f8f9fa;
+  transition: color 0.3s ease; /* Equivalent to transition duration-300 */
+}
+
+.footer-link:hover {
+  color: #20c997; /* Equivalent to text-teal-500 */
+}
+
+.footer-icon {
+  width: 1.5rem; /* Equivalent to h-6 */
+  height: 1.5rem; /* Equivalent to w-6 */
+}
+
+.footer-copyright {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  text-align: center;
 }

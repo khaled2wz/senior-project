@@ -32,9 +32,11 @@ const Header = () => {
         <Nav.Link href="/about" className="mx-2">
           About
         </Nav.Link>
-        <Nav.Link as={Link} to="/add-activity" className="mx-2">
-          Add Activity
-        </Nav.Link>
+        {user && user.email === 'khaledalhzmy2@gmail.com' && (
+          <Nav.Link as={Link} to="/add-activity" className="mx-2">
+            Add Activity
+          </Nav.Link>
+        )}
       </Nav>
 
       {/* Right Side: Account Dropdown */}
@@ -44,22 +46,27 @@ const Header = () => {
           id="account-dropdown"
           className="d-flex align-items-center account-icon"
         >
-          <i className="bi bi-person-circle fs-4"></i>
+          {user ? (
+            <span className="welcome-message">Welcome {user.firstName}</span>
+          ) : (
+            <i className="bi bi-person-circle fs-4"></i>
+          )}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {user ? (
             <>
-              <Dropdown.Item href="/account">Account</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/account">Account</Dropdown.Item>
               <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
             </>
           ) : (
             <>
-              <Dropdown.Item href="/signin">Sign In</Dropdown.Item>
-              <Dropdown.Item href="/signup">Sign Up</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/signin">Sign In</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
             </>
           )}
         </Dropdown.Menu>
       </Dropdown>
+       
     </Navbar>
   );
 };
