@@ -68,18 +68,18 @@ const SignUp = () => {
             {error && <p className="alert alert-danger">{error}</p>}
             {['firstName', 'lastName', 'email', 'password', 'confirmPassword'].map((field, index) => (
               <div key={index} className="form-group mb-3">
-                <label htmlFor={field}>{field.replace(/([A-Z])/g, ' $1').trim()}</label>
+               <label htmlFor={field}>{field.replace(/([A-Z])/g, ' $1').trim()}</label>
                 <input
-                  type={field.includes('password') ? 'password' : 'text'}
+                  type={field.includes('password') || field === 'confirmPassword' ? 'password' : 'text'}
                   id={field}
                   name={field}
                   value={formData[field]}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  required
+                onChange={handleInputChange}
+                className="form-control"
+                required
                 />
               </div>
-            ))}
+))}
             <button type="submit" className="btn btn-primary w-100">Sign Up</button>
             <div className="text-center mt-3">
               <span>Already have an account? </span>
