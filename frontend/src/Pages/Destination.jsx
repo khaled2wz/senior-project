@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../style/Destination.css"; // Ensure this file exists and matches the path
 import Header from "../components/Header";
@@ -7,6 +8,7 @@ import Footer from "../components/Footer";
 const Destination = () => {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -31,6 +33,10 @@ const Destination = () => {
     return acc;
   }, {});
 
+  const handleActivityClick = (id) => {
+    navigate(`/activity/${id}`);
+  };
+
   return (
     <>
       <Header />
@@ -43,7 +49,7 @@ const Destination = () => {
             <div className="row">
               {groupedActivities[city].map((activity, idx) => (
                 <div key={idx} className="col-md-6 col-lg-4 col-xl-3 mb-4">
-                  <div className="card">
+                  <div className="card h-100" onClick={() => handleActivityClick(activity._id)}>
                     {/* Image */}
                     <img
                       src={activity.pictureUrl}
@@ -51,7 +57,7 @@ const Destination = () => {
                       alt={activity.name}
                     />
                     {/* Card Content */}
-                    <div className="card-body">
+                    <div className="card-body d-flex flex-column">
                       <h5 className="card-title">{activity.name}</h5>
                       <p className="card-text">{activity.description}</p>
                       <p className="card-text">
