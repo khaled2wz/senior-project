@@ -60,7 +60,7 @@ const SignIn = () => {
             </div>
             <button type="submit" className="btn btn-primary w-100">Sign In</button>
             <div className="text-center mt-3">
-              <Link to="/forgot-password" className="text-primary">Forgot my password</Link>
+              <Link to="/ResetPassword" className="text-primary">Forgot my password</Link>
             </div>
             <div className="text-center mt-3">
               <span>Don't have an account? </span>

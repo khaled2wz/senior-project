@@ -10,8 +10,9 @@ import About from './Pages/about';
 import AddActivity from './Pages/AddActivity';
 import EditActivity from './Pages/EditActivity';
 import Account from './Pages/Account';
-import ActivityDetails from './Pages/ActivityDetails'; // Import the new component
+import ActivityDetails from './Pages/ActivityDetails'; 
 import { UserProvider } from './components/UserContext';
+import ResetPassword from './Pages/ResetPassword'; 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,7 +27,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/add-activity" element={<AddActivity />} />
           <Route path="/edit-activity" element={<EditActivity />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/activity/:id" element={<ActivityDetails />} /> {/* Add this line */}
+          <Route path="/activity/:id" element={<ActivityDetails />} /> 
+          <Route path="/ResetPassword" element={<ResetPassword />} /> {/* Update this line */}
         </Routes>
       </UserProvider>
     </BrowserRouter>
