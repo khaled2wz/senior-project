@@ -1,8 +1,6 @@
 /* Activities Section */
 .activities-section {
-  padding: 60px 15px;
-  background-color: #212529; /* Light background */
-  text-align: center;
+  background-color: #f8f9fa; /* Light background */
 }
 
 /* Section Header */
@@ -17,22 +15,8 @@
   color: #6c757d; /* Greyish text */
 }
 
-/* Activities Grid */
-.activities-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 30px;
-}
-
 /* Activity Card */
 .activity-card {
-  margin: 20px;
-  position: relative;
-  background: rgb(32, 29, 29);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -41,24 +25,17 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Activity Card Content */
-.activity-card-content {
-  padding: 25px;
-  text-align: center;
-}
-
-.activity-card-title {
+/* Card Content */
+.card-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #f1f1f1; /* Bootstrap primary blue */
-  margin-bottom: 10px;
+  color: #007bff; /* Bootstrap primary blue */
 }
 
-.activity-card-description {
+.card-text {
   font-size: 1rem;
-  color: #ffffff;
+  color: #212529; /* Dark text */
 }
-
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .activity-card {

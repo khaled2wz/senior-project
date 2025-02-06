@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/Activities.css';
 
 const activities = [
@@ -9,9 +10,9 @@ const activities = [
 
 const Activities = () => {
   return (
-    <section className="activities-section">
+    <section className="activities-section py-5 bg-light">
       {/* Header */}
-      <div className="activities-header text-center mb-4">
+      <div className="text-center mb-4">
         <h2 className="activities-title">Activities</h2>
         <p className="activities-subtitle">
           Discover a variety of experiences to enjoy.
@@ -19,16 +20,19 @@ const Activities = () => {
       </div>
 
       {/* Activity Cards */}
-      <div className="activities-grid row">
-        {activities.map((activity, index) => (
-          <div key={index} className="activity-card col-md-4 mb-4">
-            <div className="activity-card-overlay"></div>
-            <div className="activity-card-content p-4">
-              <h3 className="activity-card-title">{activity.name}</h3>
-              <p className="activity-card-description">{activity.description}</p>
+      <div className="container">
+        <div className="row">
+          {activities.map((activity, index) => (
+            <div key={index} className="col-md-4 mb-4">
+              <div className="card h-100 activity-card">
+                <div className="card-body">
+                  <h3 className="card-title">{activity.name}</h3>
+                  <p className="card-text">{activity.description}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

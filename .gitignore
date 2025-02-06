@@ -35,3 +35,9 @@ coverage/
 
 # Ignore operating system files
 Thumbs.db
+
+# Ignore frontend build output
+frontend/dist/
+frontend/node_modules/
+
+ 

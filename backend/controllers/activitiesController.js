@@ -42,7 +42,8 @@ const getActivityByName = async (req, res) => {
     }
     res.json(activity);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
 

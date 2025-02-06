@@ -24,6 +24,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/activities/search
+router.get('/search', getActivityByName);
+
 // GET /api/activities/:id
 router.get('/:id', async (req, res) => {
   try {
@@ -36,9 +39,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-// GET /api/activities/search
-router.get('/search', getActivityByName);
 
 // PUT /api/activities/:id
 router.put('/:id', updateActivity);
