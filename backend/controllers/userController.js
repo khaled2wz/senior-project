@@ -1,6 +1,16 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 // Register a new user
 const registerUser = async (req, res) => {
@@ -27,10 +37,10 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
-const generateToken = (id, email) => {
-    return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: '30d' });
-  };
 
+const generateToken = (id, email) => {
+  return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: '30d' });
+};
 
 // Login a user
 const loginUser = async (req, res) => {
@@ -55,10 +65,9 @@ const loginUser = async (req, res) => {
   }
 };
 
-
 // Reset Password
 const resetPassword = async (req, res) => {
-  const { email, newPassword } = req.body;
+  const { email } = req.body;
 
   try {
     const user = await User.findOne({ email });
@@ -66,10 +75,19 @@ const resetPassword = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.password = newPassword;
-    await user.save();
+    const resetToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
-    res.json({ message: 'Password reset successfully' });
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Password Reset',
+      text: `Click the following link to reset your password: ${resetLink}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.json({ message: 'Password reset email sent' });
   } catch (error) {
     console.error(error); // Log the error
     res.status(500).json({ message: 'Server error. Please try again later.' });
@@ -77,6 +95,3 @@ const resetPassword = async (req, res) => {
 };
 
 module.exports = { registerUser, loginUser, resetPassword };
-
-
-
