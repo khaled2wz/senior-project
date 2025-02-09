@@ -11,7 +11,13 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
@@ -25,5 +31,5 @@ app.get('*', (req, res) => {
 });
 
 // Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

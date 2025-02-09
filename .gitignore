@@ -1,3 +1,11 @@
+# Ignore backend node_modules and package-lock.json
+backend/node_modules/
+backend/package-lock.json
+
+# Ignore frontend build output
+frontend/dist/
+frontend/node_modules/
+
 # Ignore environment files
 *.env
 .env.local
@@ -35,9 +43,3 @@ coverage/
 
 # Ignore operating system files
 Thumbs.db
-
-# Ignore frontend build output
-frontend/dist/
-frontend/node_modules/
-
- 
