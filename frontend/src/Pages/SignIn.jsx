@@ -14,7 +14,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5002/api/users/login', {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
         email,
         password,
       });
@@ -60,7 +60,7 @@ const SignIn = () => {
             </div>
             <button type="submit" className="btn btn-primary w-100">Sign In</button>
             <div className="text-center mt-3">
-              <Link to="/ResetPassword" className="text-primary">Forgot my password</Link>
+              <Link to="/reset-password" className="text-primary">Forgot my password</Link> {/* Ensure this line is correct */}
             </div>
             <div className="text-center mt-3">
               <span>Don't have an account? </span>

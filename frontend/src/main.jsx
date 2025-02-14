@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/edit-activity" element={<EditActivity />} />
           <Route path="/account" element={<Account />} />
           <Route path="/activity/:id" element={<ActivityDetails />} /> 
-          <Route path="/ResetPassword" element={<ResetPassword />} /> {/* Update this line */}
+          <Route path="/reset-password" element={<ResetPassword />} /> {/* Ensure this line is correct */}
         </Routes>
       </UserProvider>
     </BrowserRouter>
