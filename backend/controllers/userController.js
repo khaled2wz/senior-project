@@ -24,6 +24,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
+
 // Generate a random verification code
 const generateVerificationCode = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -114,11 +115,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const generateToken = (id, email) => {
-  return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: '30d' });
-};
-
-// Login a user
+// Login user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -140,6 +137,11 @@ const loginUser = async (req, res) => {
     console.error('Error logging in user:', error); // Log the error for debugging
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }
+};
+
+// Generate JWT token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
 // Reset Password
@@ -167,6 +169,40 @@ const resetPassword = async (req, res) => {
     res.json({ message: 'Password reset email sent' });
   } catch (error) {
     console.error(error); // Log the error
+    res.status(500).json({ message: 'Server error. Please try again later.' });
+  }
+};
+
+// Update user profile
+const updateUserProfile = async (req, res) => {
+  const { firstName, lastName, email } = req.body;
+  const userId = req.user.id;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.email = email || user.email;
+
+    if (req.file) {
+      user.profilePic = `/uploads/${req.file.filename}`;
+    }
+
+    await user.save();
+
+    res.json({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.error('Error updating user profile:', error); // Log the error for debugging
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
