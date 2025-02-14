@@ -32,7 +32,7 @@ const Header = () => {
         <Nav.Link href="/about" className="mx-2">
           About
         </Nav.Link>
-        {user && (user.email === '221211505@psu.edu.sa' || user.email === '220110839@psu.edu.sa' || user.email === 'khaledalhzmy2@gmail.com') && (
+        {user && user.role === 'admin' && (
           <>
             <Nav.Link as={Link} to="/add-activity" className="mx-2">
               Add Activity

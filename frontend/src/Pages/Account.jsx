@@ -1,18 +1,73 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../components/UserContext';
+import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../../style/Account.css';
 
 const Account = () => {
   const { user, fetchUserData } = useContext(UserContext);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    profilePic: null,
+  });
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      fetchUserData(token);
+    if (user) {
+      setFormData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePic: user.profilePic || null,
+      });
     }
-  }, [fetchUserData]);
+  }, [user]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      profilePic: e.target.files[0],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('email', formData.email);
+      if (formData.profilePic) {
+        formDataToSend.append('profilePic', formData.profilePic);
+      }
+
+      const response = await axios.put('/api/users/me', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      setMessage('Profile updated successfully');
+      fetchUserData(localStorage.getItem('token'));
+      setEditMode(false);
+    } catch (err) {
+      setMessage(err.response?.data?.message || 'Failed to update profile');
+    }
+  };
 
   if (!user) {
     return (
@@ -34,9 +89,72 @@ const Account = () => {
       <div className="account-container">
         <div className="container mt-5">
           <h2>Account Information</h2>
-          <p><strong>First Name:</strong> {user.firstName}</p>
-          <p><strong>Last Name:</strong> {user.lastName}</p>
-          <p><strong>Email:</strong> {user.email}</p>
+          {message && <p className="alert alert-info">{message}</p>}
+          <div className="row">
+            <div className="col-md-4 text-center">
+              {user.profilePic && <img src={user.profilePic} alt="Profile" className="profile-pic img-fluid rounded-circle" />}
+            </div>
+            <div className="col-md-8">
+              {editMode ? (
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="firstName" className="form-label">First Name</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      className="form-control"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="lastName" className="form-label">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      className="form-control"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="profilePic" className="form-label">Profile Picture</label>
+                    <input
+                      type="file"
+                      id="profilePic"
+                      name="profilePic"
+                      className="form-control"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">Save Changes</button>
+                  <button type="button" className="btn btn-secondary ms-2" onClick={() => setEditMode(false)}>Cancel</button>
+                </form>
+              ) : (
+                <div>
+                  <p><strong>First Name:</strong> {user.firstName} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
+                  <p><strong>Last Name:</strong> {user.lastName} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
+                  <p><strong>Email:</strong> {user.email} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <Footer />

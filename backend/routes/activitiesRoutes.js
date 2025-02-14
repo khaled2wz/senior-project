@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { addActivity, updateActivity, deleteActivity, getActivityByName } = require('../controllers/activitiesController');
-const Activity = require('../models/Activity');
+const { protect, admin } = require('../middleware/authMiddleware');
+const Activity = require('../models/Activity'); // Ensure Activity model is imported
 
 // POST /api/activities
-router.post('/', addActivity);
+router.post('/', protect, admin, addActivity);
 
 // GET /api/activities
 router.get('/', async (req, res) => {
@@ -41,9 +42,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // PUT /api/activities/:id
-router.put('/:id', updateActivity);
+router.put('/:id', protect, admin, updateActivity);
 
 // DELETE /api/activities/:id
-router.delete('/:id', deleteActivity);
+router.delete('/:id', protect, admin, deleteActivity);
 
 module.exports = router;

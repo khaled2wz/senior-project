@@ -43,3 +43,5 @@ coverage/
 
 # Ignore operating system files
 Thumbs.db
+# Ignore uploads directory
+backend/uploads/
