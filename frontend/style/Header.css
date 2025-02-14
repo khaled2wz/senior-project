@@ -33,13 +33,13 @@
     font-weight: 500;
     color: #f8f9fa;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem; /* Smooth corners */
+    border-radius: 0.5rem;  
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .navbar-nav .nav-link:hover {
-    background-color: #495057; /* Dark hover background */
-    color: #adb5bd; /* Softer text color */
+    background-color: #495057;  
+    color: #adb5bd;  
   }
   
   .account-icon {
@@ -50,7 +50,7 @@
   }
   
   .account-icon:hover {
-    color: #adb5bd; /* Matches hover color */
+    color: #adb5bd; 
     transform: scale(1.1);
   }
   
@@ -58,7 +58,7 @@
     background-color: #495057;
     border: 1px solid #343a40;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced dropdown shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  
     padding: 0.5rem;
   }
   

@@ -48,6 +48,15 @@ const userSchema = new mongoose.Schema(
         type: Number,
         min: 1,
       },
+      role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user",
+      },
+      profilePic: {
+        type: String,
+        default: null,
+      },
     },
   },
   { timestamps: true }

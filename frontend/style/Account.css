@@ -1,24 +1,58 @@
 /* Account Page Styles */
 .account-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #212529; 
-    color: #f8f9fa; 
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #212529;
+  padding: 20px;
+}
+
+.container {
+  flex-grow: 1;
+}
+
+.account-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.account-container p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.alert-info {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .profile-pic {
+    width: 100px;
+    height: 100px;
   }
-  
-  .container {
-    flex-grow: 1;
-  }
-  
-  .account-container h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .account-container p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
+}

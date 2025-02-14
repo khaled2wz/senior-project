@@ -47,7 +47,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5002/api/users/register', formData);
+      const response = await axios.post('http://localhost:5000/api/users/register', formData);
       localStorage.setItem('token', response.data.token);
       navigate('/');
     } catch (err) {
