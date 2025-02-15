@@ -6,7 +6,7 @@ const AddActivity = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    city: '',
+    locationCity: '',
     type: [],
     cost: 0,
     durationHours: 1,
@@ -14,13 +14,9 @@ const AddActivity = () => {
     categories: [],
     pictureUrl: ''
   });
-  const [cities, setCities] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-          axios.get('/api/cities'),
-        console.log('Cities Response:', citiesResponse.data); // Debugging log
-        setCities(citiesResponse.data || []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -91,19 +87,39 @@ const AddActivity = () => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="city" className="form-label">City</label>
+            <label htmlFor="locationCity" className="form-label">City</label>
             <select
-              id="city"
-              name="city"
+              id="locationCity"
+              name="locationCity"
               className="form-select"
-              value={formData.city}
+              value={formData.locationCity}
               onChange={handleChange}
               required
             >
               <option value="">-- Select a city --</option>
-              {Array.isArray(cities) && cities.map((city) => (
-                <option key={city._id} value={city._id}>{city.name}</option>
-              ))}
+              <option value="Riyadh">Riyadh</option>
+              <option value="Jeddah">Jeddah</option>
+              <option value="Mecca">Mecca</option>
+              <option value="Medina">Medina</option>
+              <option value="Al-Ula">Al-Ula</option>
+              <option value="Khobar">Khobar</option>
+              <option value="Dammam">Dammam</option>
+              <option value="Abha">Abha</option>
+              <option value="Neom">Neom</option>
+              <option value="Tabuk">Tabuk</option>
+              <option value="Qassim">Qassim</option>
+              <option value="Hail">Hail</option>
+              <option value="Jizan">Jizan</option>
+              <option value="Najran">Najran</option>
+              <option value="Taif">Taif</option>
+              <option value="Al-Baha">Al-Baha</option>
+              <option value="Jubail">Jubail</option>
+              <option value="Hafr Al-Batin">Hafr Al-Batin</option>
+              <option value="Arar">Arar</option>
+              <option value="Sakaka">Sakaka</option>
+              <option value="Al-Ahsa">Al-Ahsa</option>
+              <option value="Al-Kharj">Al-Kharj</option>
+              <option value="Al-Ghat">Al-Ghat</option>
             </select>
           </div>
 
