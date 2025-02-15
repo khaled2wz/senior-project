@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+
 const AddActivity = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    locationCity: '',
+    city: '',
     type: [],
     cost: 0,
     durationHours: 1,
@@ -14,8 +15,31 @@ const AddActivity = () => {
     categories: [],
     pictureUrl: ''
   });
+  const [cities, setCities] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [types, setTypes] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [citiesResponse, categoriesAndTypesResponse] = await Promise.all([
+          axios.get('/api/cities'),
+          axios.get('/api/activities/categories-and-types')
+        ]);
+        console.log('Cities Response:', citiesResponse.data); // Debugging log
+        setCities(citiesResponse.data || []);
+        setCategories(categoriesAndTypesResponse.data.categories || []);
+        setTypes(categoriesAndTypesResponse.data.types || []);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to fetch data');
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +71,7 @@ const AddActivity = () => {
       });
       setSuccess(data.message);
     } catch (err) {
+      console.error('Error adding activity:', err);
       setError(err.response?.data?.message || 'Failed to add activity');
     }
   };
@@ -87,152 +112,38 @@ const AddActivity = () => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="locationCity" className="form-label">City</label>
+            <label htmlFor="city" className="form-label">City</label>
             <select
-              id="locationCity"
-              name="locationCity"
+              id="city"
+              name="city"
               className="form-select"
-              value={formData.locationCity}
+              value={formData.city}
               onChange={handleChange}
               required
             >
               <option value="">-- Select a city --</option>
-              <option value="Riyadh">Riyadh</option>
-              <option value="Jeddah">Jeddah</option>
-              <option value="Mecca">Mecca</option>
-              <option value="Medina">Medina</option>
-              <option value="Al-Ula">Al-Ula</option>
-              <option value="Khobar">Khobar</option>
-              <option value="Dammam">Dammam</option>
-              <option value="Abha">Abha</option>
-              <option value="Neom">Neom</option>
-              <option value="Tabuk">Tabuk</option>
-              <option value="Qassim">Qassim</option>
-              <option value="Hail">Hail</option>
-              <option value="Jizan">Jizan</option>
-              <option value="Najran">Najran</option>
-              <option value="Taif">Taif</option>
-              <option value="Al-Baha">Al-Baha</option>
-              <option value="Jubail">Jubail</option>
-              <option value="Hafr Al-Batin">Hafr Al-Batin</option>
-              <option value="Arar">Arar</option>
-              <option value="Sakaka">Sakaka</option>
-              <option value="Al-Ahsa">Al-Ahsa</option>
-              <option value="Al-Kharj">Al-Kharj</option>
-              <option value="Al-Ghat">Al-Ghat</option>
+              {Array.isArray(cities) && cities.map((city) => (
+                <option key={city._id} value={city._id}>{city.name}</option>
+              ))}
             </select>
           </div>
 
           <div className="mb-3">
             <label className="form-label">Type</label>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="historical"
-                name="type"
-                value="Historical"
-                className="form-check-input"
-                checked={formData.type.includes('Historical')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="historical" className="form-check-label">Historical</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="adventure"
-                name="type"
-                value="Adventure"
-                className="form-check-input"
-                checked={formData.type.includes('Adventure')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="adventure" className="form-check-label">Adventure</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="cultural"
-                name="type"
-                value="Cultural"
-                className="form-check-input"
-                checked={formData.type.includes('Cultural')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="cultural" className="form-check-label">Cultural</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="experiences"
-                name="type"
-                value="Experiences"
-                className="form-check-input"
-                checked={formData.type.includes('Experiences')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="experiences" className="form-check-label">Experiences</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="theater-and-arts"
-                name="type"
-                value="Theater and arts"
-                className="form-check-input"
-                checked={formData.type.includes('Theater and arts')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="theater-and-arts" className="form-check-label">Theater and arts</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="concerts"
-                name="type"
-                value="Concerts"
-                className="form-check-input"
-                checked={formData.type.includes('Concerts')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="concerts" className="form-check-label">Concerts</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="sports"
-                name="type"
-                value="Sports"
-                className="form-check-input"
-                checked={formData.type.includes('Sports')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="sports" className="form-check-label">Sports</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="food"
-                name="type"
-                value="Food"
-                className="form-check-input"
-                checked={formData.type.includes('Food')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="food" className="form-check-label">Food</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="music"
-                name="type"
-                value="Music"
-                className="form-check-input"
-                checked={formData.type.includes('Music')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="music" className="form-check-label">Music</label>
-            </div>
+            {Array.isArray(types) && types.map((type) => (
+              <div key={type} className="form-check">
+                <input
+                  type="checkbox"
+                  id={type}
+                  name="type"
+                  value={type}
+                  className="form-check-input"
+                  checked={formData.type.includes(type)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor={type} className="form-check-label">{type}</label>
+              </div>
+            ))}
           </div>
 
           <div className="mb-3">
@@ -280,90 +191,20 @@ const AddActivity = () => {
 
           <div className="mb-3">
             <label className="form-label">Categories</label>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="family-friendly"
-                name="categories"
-                value="Family-friendly"
-                className="form-check-input"
-                checked={formData.categories.includes('Family-friendly')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="family-friendly" className="form-check-label">Family-friendly</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="outdoor"
-                name="categories"
-                value="Outdoor"
-                className="form-check-input"
-                checked={formData.categories.includes('Outdoor')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="outdoor" className="form-check-label">Outdoor</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="luxury"
-                name="categories"
-                value="Luxury"
-                className="form-check-input"
-                checked={formData.categories.includes('Luxury')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="luxury" className="form-check-label">Luxury</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="budget"
-                name="categories"
-                value="Budget"
-                className="form-check-input"
-                checked={formData.categories.includes('Budget')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="budget" className="form-check-label">Budget</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="solo-traveler"
-                name="categories"
-                value="Solo-traveler"
-                className="form-check-input"
-                checked={formData.categories.includes('Solo-traveler')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="solo-traveler" className="form-check-label">Solo-traveler</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="group-traveler"
-                name="categories"
-                value="Group-traveler"
-                className="form-check-input"
-                checked={formData.categories.includes('Group-traveler')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="group-traveler" className="form-check-label">Group-traveler</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="indoor"
-                name="categories"
-                value="Indoor"
-                className="form-check-input"
-                checked={formData.categories.includes('Indoor')}
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor="indoor" className="form-check-label">Indoor</label>
-            </div>
+            {Array.isArray(categories) && categories.map((category) => (
+              <div key={category} className="form-check">
+                <input
+                  type="checkbox"
+                  id={category}
+                  name="categories"
+                  value={category}
+                  className="form-check-input"
+                  checked={formData.categories.includes(category)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor={category} className="form-check-label">{category}</label>
+              </div>
+            ))}
           </div>
 
           <div className="mb-3">
