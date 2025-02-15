@@ -11,10 +11,10 @@ const activitySchema = new mongoose.Schema(
       type: String,
       required: [true, "Description is required"],
     },
-    city: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "City",
+    locationCity: {
+      type: String,
       required: [true, "City is required"],
+      enum: ["Riyadh", "Jeddah", "Mecca", "Medina", "Al-Ula", "Khobar", "Dammam", "Abha", "Neom","Tabuk","Qassim","Hail","Jizan","Najran","Taif","Al-Baha","Jubail","Hafr Al-Batin","Arar","Sakaka","Al-Ahsa","Al-Kharj","Al-Ghat"],
     },
     type: {
       type: [String],

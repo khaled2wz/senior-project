@@ -27,27 +27,12 @@ const Account = () => {
     }
   }, [user]);
 
-  const handleDeletePic = async () => {
-    try {
-      setMessage('');
-      await axios.delete('/api/users/me/profile-pic', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      setMessage('Profile picture deleted successfully.');
-      
-      // Clear the local state version too
-      setFormData((prev) => ({
-        ...prev,
-        profilePic: null,
-      }));
-      
-      // Fetch updated user data from the server if needed
-      fetchUserData(localStorage.getItem('token'));
-    } catch (err) {
-      setMessage(err.response?.data?.message || 'Failed to delete profile picture');
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -55,11 +40,6 @@ const Account = () => {
       ...prev,
       profilePic: e.target.files[0],
     }));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -70,11 +50,11 @@ const Account = () => {
       formDataToSend.append('firstName', formData.firstName);
       formDataToSend.append('lastName', formData.lastName);
       formDataToSend.append('email', formData.email);
-      if (formData.profilePic instanceof File) {
+      if (formData.profilePic) {
         formDataToSend.append('profilePic', formData.profilePic);
       }
 
-      await axios.put('/api/users/me', formDataToSend, {
+      const response = await axios.put('/api/users/me', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -112,36 +92,13 @@ const Account = () => {
           {message && <p className="alert alert-info">{message}</p>}
           <div className="row">
             <div className="col-md-4 text-center">
-              {formData.profilePic ? (
-                <img
-                  src={
-                    typeof formData.profilePic === 'string'
-                      ? formData.profilePic
-                      : URL.createObjectURL(formData.profilePic)
-                  }
-                  alt="Profile"
-                  className="profile-pic img-fluid rounded-circle"
-                />
-              ) : (
-                <div className="profile-pic-placeholder">No Profile Picture</div>
-              )}
-              {/* Delete Button (only show if there's a current picture) */}
-              {user.profilePic && (
-                <button
-                  className="btn btn-danger mt-2"
-                  onClick={handleDeletePic}
-                >
-                  Delete Picture
-                </button>
-              )}
+              {user.profilePic && <img src={user.profilePic} alt="Profile" className="profile-pic img-fluid rounded-circle" />}
             </div>
             <div className="col-md-8">
               {editMode ? (
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="firstName" className="form-label">
-                      First Name
-                    </label>
+                    <label htmlFor="firstName" className="form-label">First Name</label>
                     <input
                       type="text"
                       id="firstName"
@@ -153,9 +110,7 @@ const Account = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="lastName" className="form-label">
-                      Last Name
-                    </label>
+                    <label htmlFor="lastName" className="form-label">Last Name</label>
                     <input
                       type="text"
                       id="lastName"
@@ -167,9 +122,7 @@ const Account = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
-                      Email
-                    </label>
+                    <label htmlFor="email" className="form-label">Email</label>
                     <input
                       type="email"
                       id="email"
@@ -181,9 +134,7 @@ const Account = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="profilePic" className="form-label">
-                      Profile Picture
-                    </label>
+                    <label htmlFor="profilePic" className="form-label">Profile Picture</label>
                     <input
                       type="file"
                       id="profilePic"
@@ -192,40 +143,14 @@ const Account = () => {
                       onChange={handleFileChange}
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary">
-                    Save Changes
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary ms-2"
-                    onClick={() => setEditMode(false)}
-                  >
-                    Cancel
-                  </button>
+                  <button type="submit" className="btn btn-primary">Save Changes</button>
+                  <button type="button" className="btn btn-secondary ms-2" onClick={() => setEditMode(false)}>Cancel</button>
                 </form>
               ) : (
                 <div>
-                  <p>
-                    <strong>First Name:</strong> {user.firstName}{' '}
-                    <i
-                      className="bi bi-pencil"
-                      onClick={() => setEditMode(true)}
-                    ></i>
-                  </p>
-                  <p>
-                    <strong>Last Name:</strong> {user.lastName}{' '}
-                    <i
-                      className="bi bi-pencil"
-                      onClick={() => setEditMode(true)}
-                    ></i>
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {user.email}{' '}
-                    <i
-                      className="bi bi-pencil"
-                      onClick={() => setEditMode(true)}
-                    ></i>
-                  </p>
+                  <p><strong>First Name:</strong> {user.firstName} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
+                  <p><strong>Last Name:</strong> {user.lastName} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
+                  <p><strong>Email:</strong> {user.email} <i className="bi bi-pencil" onClick={() => setEditMode(true)}></i></p>
                 </div>
               )}
             </div>

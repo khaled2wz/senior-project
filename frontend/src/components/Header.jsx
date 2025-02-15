@@ -52,16 +52,7 @@ const Header = () => {
           className="d-flex align-items-center account-icon"
         >
           {user ? (
-            user.profilePic ? (
-              <img
-                src={user.profilePic}
-                alt="Profile"
-                className="profile-pic-header rounded-circle"
-                style={{ width: '40px', height: '40px' }}
-              />
-            ) : (
-              <i className="bi bi-person-circle fs-4"></i>
-            )
+            <span className="welcome-message">Welcome {user.firstName}</span>
           ) : (
             <i className="bi bi-person-circle fs-4"></i>
           )}

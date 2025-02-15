@@ -18,15 +18,13 @@ const corsOptions ={
   optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
- 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/activities', require('./routes/activitiesRoutes'));
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.use('/api/cities', require('./routes/citiesRoutes')); 
+
 // Root Route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
