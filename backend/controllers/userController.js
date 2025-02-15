@@ -206,39 +206,5 @@ const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
-const deleteProfilePic = async (req, res) => {
-  try {
-    // Identify the user from the request (token, session, etc.)
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    
-    // If there's no profilePic, return a 400 (nothing to delete).
-    if (!user.profilePic) {
-      return res.status(400).json({ message: 'No profile picture to delete' });
-    }
 
-    
-    const fileName = user.profilePic.replace('/uploads/', '');  
-    const filePath = path.join(__dirname, '../uploads', fileName);
-    
-    fs.unlink(filePath, (err) => {
-     
-      if (err) {
-        console.error('Error removing file:', err);
-      }
-    });
-
-    // Set the database field to null
-    user.profilePic = null;
-    await user.save();
-
-    return res.json({ message: 'Profile picture deleted successfully.' });
-  } catch (error) {
-    console.error('Error deleting profile pic:', error);
-    return res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
-module.exports = { registerUser,deleteProfilePic, loginUser, sendVerificationCode, verifyCodeAndResetPassword, resetPassword, updateUserProfile, upload };
+module.exports = { registerUser, loginUser, sendVerificationCode, verifyCodeAndResetPassword, resetPassword, updateUserProfile, upload };

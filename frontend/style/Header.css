@@ -1,82 +1,76 @@
 .navbar {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: linear-gradient(to right, #343a40, #212529, #343a40); /* Matching gradient */
-  color: #f8f9fa;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Soft shadow */
-  border-bottom: 1px solid #495057; /* Subtle border */
-}
-
-.logo-btn {
-  font-size: 1.8rem; /* Larger font for visibility */
-  font-weight: 800;
-  color: #f8f9fa;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.logo-btn:hover {
-  color: #adb5bd; /* Soft hover color */
-  transform: scale(1.1); /* Slight scaling effect */
-}
-
-.navbar-nav {
-  display: flex;
-  gap: 1.5rem; /* Space between navigation links */
-  align-items: center;
-}
-
-.navbar-nav .nav-link {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #f8f9fa;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;  
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  background-color: #495057;  
-  color: #adb5bd;  
-}
-
-.account-icon {
-  font-size: 1.5rem;
-  color: #f8f9fa;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.account-icon:hover {
-  color: #adb5bd; 
-  transform: scale(1.1);
-}
-
-.profile-pic-header {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.dropdown-menu {
-  background-color: #495057;
-  border: 1px solid #343a40;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  
-  padding: 0.5rem;
-}
-
-.dropdown-menu .dropdown-item {
-  color: #f8f9fa;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-menu .dropdown-item:hover {
-  background-color: #343a40;
-  color: #adb5bd;
-}
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(to right, #343a40, #212529, #343a40); /* Matching gradient */
+    color: #f8f9fa;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Soft shadow */
+    border-bottom: 1px solid #495057; /* Subtle border */
+  }
+  
+  .logo-btn {
+    font-size: 1.8rem; /* Larger font for visibility */
+    font-weight: 800;
+    color: #f8f9fa;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .logo-btn:hover {
+    color: #adb5bd; /* Soft hover color */
+    transform: scale(1.1); /* Slight scaling effect */
+  }
+  
+  .navbar-nav {
+    display: flex;
+    gap: 1.5rem; /* Space between navigation links */
+    align-items: center;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;  
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    background-color: #495057;  
+    color: #adb5bd;  
+  }
+  
+  .account-icon {
+    font-size: 1.5rem;
+    color: #f8f9fa;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .account-icon:hover {
+    color: #adb5bd; 
+    transform: scale(1.1);
+  }
+  
+  .dropdown-menu {
+    background-color: #495057;
+    border: 1px solid #343a40;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  
+    padding: 0.5rem;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #343a40;
+    color: #adb5bd;
+  }
+  
