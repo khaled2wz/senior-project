@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+
 const AddActivity = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -16,6 +17,21 @@ const AddActivity = () => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [cityNames, setCityNames] = useState([]); // Add state for city names
+
+  useEffect(() => {
+    // Fetch city names when the component mounts
+    const fetchCityNames = async () => {
+      try {
+        const response = await axios.get('/api/cities/names');
+        setCityNames(response.data.cityNames);
+      } catch (err) {
+        console.error('Failed to fetch city names:', err);
+      }
+    };
+
+    fetchCityNames();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,29 +113,9 @@ const AddActivity = () => {
               required
             >
               <option value="">-- Select a city --</option>
-              <option value="Riyadh">Riyadh</option>
-              <option value="Jeddah">Jeddah</option>
-              <option value="Mecca">Mecca</option>
-              <option value="Medina">Medina</option>
-              <option value="Al-Ula">Al-Ula</option>
-              <option value="Khobar">Khobar</option>
-              <option value="Dammam">Dammam</option>
-              <option value="Abha">Abha</option>
-              <option value="Neom">Neom</option>
-              <option value="Tabuk">Tabuk</option>
-              <option value="Qassim">Qassim</option>
-              <option value="Hail">Hail</option>
-              <option value="Jizan">Jizan</option>
-              <option value="Najran">Najran</option>
-              <option value="Taif">Taif</option>
-              <option value="Al-Baha">Al-Baha</option>
-              <option value="Jubail">Jubail</option>
-              <option value="Hafr Al-Batin">Hafr Al-Batin</option>
-              <option value="Arar">Arar</option>
-              <option value="Sakaka">Sakaka</option>
-              <option value="Al-Ahsa">Al-Ahsa</option>
-              <option value="Al-Kharj">Al-Kharj</option>
-              <option value="Al-Ghat">Al-Ghat</option>
+              {cityNames.map((cityName) => (
+                <option key={cityName} value={cityName}>{cityName}</option>
+              ))}
             </select>
           </div>
 

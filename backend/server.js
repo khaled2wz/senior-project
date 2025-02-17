@@ -3,7 +3,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
-
+const cityRoutes = require("./routes/cityRoutes");
+const userRoutes = require("./routes/userRoutes");
+const activitiesRoutes = require("./routes/activitiesRoutes");
 dotenv.config();
 connectDB();
 
@@ -12,16 +14,19 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            
-  optionSuccessStatus:200
-}
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200
+};
 app.use(cors(corsOptions));
 
 // Routes
-app.use('/api/users', require('./routes/userRoutes'));
-app.use('/api/activities', require('./routes/activitiesRoutes'));
+app.use('/api/users', userRoutes);
+app.use('/api/activities', activitiesRoutes);
+app.use("/api/cities", cityRoutes);
+
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -34,4 +39,4 @@ app.get('*', (req, res) => {
 // Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-module.exports = {app};
+module.exports = { app };

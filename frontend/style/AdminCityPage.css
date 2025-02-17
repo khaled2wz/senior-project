@@ -1,0 +1,27 @@
+/* CityManagementPage.css */
+
+/* Highlight the active toggle button in a subtle way */
+.active-mode {
+  background-color: #0d6efd; /* same as .btn-primary background in bootstrap */
+  color: #fff; 
+  border-color: #0d6efd;
+}
+
+.city-management-container {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.city-management-container h2 {
+  margin-bottom: 1rem;
+}
+
+.city-management-form .input-group + .input-group {
+  margin-top: 0.5rem;
+}

@@ -40,6 +40,9 @@ const Header = () => {
             <Nav.Link as={Link} to="/edit-activity" className="mx-2">
               Edit Activity
             </Nav.Link>
+            <Nav.Link as={Link} to="/AdminCityPage" className="mx-2">
+              Add City
+            </Nav.Link>
           </>
         )}
       </Nav>

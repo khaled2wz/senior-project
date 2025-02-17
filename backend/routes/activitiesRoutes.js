@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { addActivity, updateActivity, deleteActivity, getActivityByName } = require('../controllers/activitiesController');
 const { protect, admin } = require('../middleware/authMiddleware');
-const Activity = require('../models/Activity'); // Ensure Activity model is imported
+const Activity = require('../models/Activity'); 
 
 // POST /api/activities
 router.post('/', protect, admin, addActivity);
