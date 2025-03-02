@@ -7,6 +7,8 @@ const cityRoutes = require("./routes/cityRoutes");
 const userRoutes = require("./routes/userRoutes");
 const activitiesRoutes = require("./routes/activitiesRoutes");
 const aboutRoutes = require('./routes/aboutRoutes'); 
+const chatbotRoutes = require('./routes/chatbotRoutes'); // Add this line
+
 dotenv.config();
 connectDB();
 
@@ -27,7 +29,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/activities', activitiesRoutes);
 app.use("/api/cities", cityRoutes);
 app.use('/api/about', aboutRoutes);
-
+app.use('/api/chatbot', chatbotRoutes); // Add this line
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
@@ -35,10 +37,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Root Route
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-// Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-module.exports = { app };
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
